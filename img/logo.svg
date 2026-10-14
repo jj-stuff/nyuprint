@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <title>NYU Print</title>
+  <defs>
+    <!-- NYU violet (#57068C) into a brighter violet -->
+    <linearGradient id="body" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#9B3BE8"/>
+      <stop offset="0.55" stop-color="#6F12B0"/>
+      <stop offset="1" stop-color="#57068C"/>
+    </linearGradient>
+    <linearGradient id="slot" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2E0350"/>
+      <stop offset="1" stop-color="#4A0778"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#F1E6FA" stop-opacity="0.85"/>
+    </linearGradient>
+    <!-- Glass: bright top sheen fading out -->
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.65"/>
+      <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Glass rim: light top-left, dark bottom-right -->
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#2E0350" stop-opacity="0.5"/>
+    </linearGradient>
+    <radialGradient id="glint" cx="0.3" cy="0.2" r="0.5">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Emboss: soft specular light over the shape's own alpha -->
+    <filter id="emboss" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="14" result="blur"/>
+      <feSpecularLighting in="blur" surfaceScale="6" specularConstant="0.9" specularExponent="22" lighting-color="#FFFFFF" result="spec">
+        <fePointLight x="250" y="120" z="420"/>
+      </feSpecularLighting>
+      <feComposite in="spec" in2="SourceAlpha" operator="in" result="lit"/>
+      <feComposite in="SourceGraphic" in2="lit" operator="arithmetic" k1="0" k2="1" k3="0.55" k4="0"/>
+    </filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="28" stdDeviation="30" flood-color="#57068C" flood-opacity="0.32"/>
+    </filter>
+    <filter id="frost" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#2E0350" flood-opacity="0.18"/>
+    </filter>
+    <clipPath id="bodyClip">
+      <rect x="192" y="372" width="640" height="340" rx="96"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1024" height="1024" fill="#FFFFFF"/>
+
+  <!-- Paper waiting in the input tray (frosted glass sheet) -->
+  <rect x="322" y="196" width="380" height="240" rx="36" fill="url(#paper)" stroke="#D9C2EE" stroke-width="4" filter="url(#frost)"/>
+
+  <!-- Printer body -->
+  <g filter="url(#shadow)">
+    <rect x="192" y="372" width="640" height="340" rx="96" fill="url(#body)" filter="url(#emboss)"/>
+  </g>
+  <g clip-path="url(#bodyClip)">
+    <!-- top glass sheen -->
+    <rect x="192" y="372" width="640" height="190" rx="96" fill="url(#sheen)"/>
+    <!-- corner glint -->
+    <ellipse cx="330" cy="420" rx="210" ry="110" fill="url(#glint)"/>
+  </g>
+  <!-- glass rim -->
+  <rect x="196" y="376" width="632" height="332" rx="92" fill="none" stroke="url(#rim)" stroke-width="8"/>
+
+  <!-- status light -->
+  <circle cx="712" cy="468" r="22" fill="#FFFFFF" fill-opacity="0.92"/>
+  <circle cx="706" cy="462" r="8" fill="#FFFFFF"/>
+
+  <!-- Output slot -->
+  <rect x="300" y="600" width="424" height="44" rx="22" fill="url(#slot)"/>
+
+  <!-- Printed page coming out (frosted, with violet lines) -->
+  <g filter="url(#frost)">
+    <path d="M336 622 H688 V800 A40 40 0 0 1 648 840 H376 A40 40 0 0 1 336 800 Z" fill="url(#paper)" stroke="#D9C2EE" stroke-width="4"/>
+  </g>
+  <rect x="392" y="688" width="240" height="18" rx="9" fill="#57068C" fill-opacity="0.85"/>
+  <rect x="392" y="728" width="188" height="18" rx="9" fill="#8A3FD0" fill-opacity="0.55"/>
+  <rect x="392" y="768" width="214" height="18" rx="9" fill="#8A3FD0" fill-opacity="0.35"/>
+  <!-- page sheen -->
+  <path d="M340 626 H684 V680 H340 Z" fill="#FFFFFF" fill-opacity="0.45"/>
+</svg>
